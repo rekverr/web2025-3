@@ -18,18 +18,18 @@ if (!fs.existsSync(options.input)) {
   console.error("Cannot find input file");
   process.exit(1);
 }
-
 const inputData = JSON.parse(fs.readFileSync(options.input, 'utf8'));
+const maxRate = Math.max(...inputData.map(entry => entry.rate));
 
 if (options.output && options.display) {
-  console.log(inputData);
-  fs.writeFileSync(options.output, JSON.stringify(inputData, null, 2), 'utf8');
+  console.log(`Максимальний курс:${maxRate}`);
+  fs.writeFileSync(options.output, `Максимальний курс: ${maxRate}`, 'utf8');
 }
 
 if (options.display) {
-  console.log(inputData);
+  console.log(`Максимальний курс: ${maxRate}`);
 }
 
 if (options.output) {
-  fs.writeFileSync(options.output, JSON.stringify(inputData, null, 2), 'utf8');
+  fs.writeFileSync(options.output, `Максимальний курс: ${maxRate}`, 'utf8');
 }
